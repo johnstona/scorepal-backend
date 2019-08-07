@@ -18,6 +18,8 @@ gem 'puma', '~> 3.11'
 
 gem 'faker'
 
+gem 'database_cleaner'
+
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
 

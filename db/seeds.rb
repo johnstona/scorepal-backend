@@ -1,4 +1,12 @@
 require 'faker'
+require 'database_cleaner'
+
+DatabaseCleaner.strategy = :truncation
+DatabaseCleaner.clean
+
+User.delete_all
+Match.delete_all
+Relationship.delete_all
 
 # Users
 User.create!(name:  "Example User",
@@ -27,12 +35,18 @@ Match.create!(user_id: 1,
   opponent_score: 0)
 
 99.times do
-  user_id = rand(1..99),
-  sport = Faker::Game.title,
-  opponent_id = rand(1..99),
-  opponent_name = Faker::Sports::Football.player,
+  user_id = rand(1..99)
+  sport = Faker::Game.title
+  opponent_id = rand(1..99)
+  opponent_name = Faker::Sports::Football.player
   user_score = rand(1..20)
   opponent_score = rand(1..20)
+  Match.create!(user_id: user_id,
+    sport: sport,
+    opponent_id: opponent_id,
+    opponent_name: opponent_name,
+    user_score: user_score,
+    opponent_score: opponent_score)
 end
 
 # Following relationships
