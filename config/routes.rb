@@ -3,10 +3,9 @@ Rails.application.routes.draw do
   resources :matches
   resources :users
 
-  get    '/signup',  to: 'users#new'
-  get    '/login',   to: 'sessions#new'
-  post   '/login',   to: 'sessions#create'
-  delete '/logout',  to: 'sessions#destroy'
+  post   '/login',   to: 'auth#create'
+  delete '/logout',  to: 'auth#destroy'
+
   resources :users do
     member do
       get :following, :followers
