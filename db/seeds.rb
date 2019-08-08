@@ -18,7 +18,7 @@ User.create!(name:  "Example User",
 name  = Faker::Sports::Football.player
 username = Faker::Sports::Football.team
 password = "password"
-avatar = "img_url"
+avatar = rand(1..19)
 User.create!(name:  name,
     username: username,
     password: password,
