@@ -12,11 +12,11 @@ Relationship.delete_all
 User.create!(name:  "Example User",
   username: "Username",
   password:              "foobar",
-  avatar: "img_url")
+  avatar: "1")
 
 99.times do
 name  = Faker::Sports::Football.player
-username = Faker::Sports::Football.team
+username = rand(1..99).to_s + Faker::Sports::Football.team
 password = "password"
 avatar = rand(1..19)
 User.create!(name:  name,
