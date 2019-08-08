@@ -9,6 +9,12 @@ class User < ApplicationRecord
                                   dependent: :destroy
   has_many :followers, through: :passive_relationships
 
+  validates :username, uniqueness: { case_sensitive: false }
+  validates :name, presence: true
+  validates :username, presence: true
+  validates :password, presence: true
+  validates :avatar, presence: true
+
   # Follows a user.
   def follow(other_user)
     following << other_user
