@@ -16,7 +16,7 @@ User.create!(name:  "Example User",
 
 99.times do
 name  = Faker::Sports::Football.player
-username = rand(1..99).to_s + Faker::Sports::Football.team
+username =  Faker::Sports::Football.team + rand(1..999).to_s
 password = "password"
 avatar = rand(1..19)
 User.create!(name:  name,
@@ -51,9 +51,8 @@ end
 
 # Following relationships
 
-users = User.all
-user  = users.first
-following = users[2..50]
-followers = users[3..40]
-following.each { |followed| user.follow(followed) }
-followers.each { |follower| follower.follow(user) }
+500.times do
+  user1 = User.find(rand(1..99))
+  user2 = User.find(rand(1..99))
+  user1.follow(user2)
+end
