@@ -36,6 +36,13 @@ class UsersController < ApplicationController
     @users = @user.followers
     render json: @users, except: [:password, :created_at, :updated_at]
   end
+
+  def matches
+    @title = "Matches"
+    @user = User.find(params[:id])
+    @matches = Match.where(user_id: @user.id).or(Match.where(opponent_id: @user.id))
+    render json: @matches, except: [:created_at, :updated_at]
+  end
   
   
   private
