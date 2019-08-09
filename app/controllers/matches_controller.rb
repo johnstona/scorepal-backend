@@ -30,6 +30,6 @@ class MatchesController < ApplicationController
   end
 
   def match_params
-    params.require(:quiz).permit(:id, :user_id, :sport, :opponent_id, :opponent_name, :user_score, :opponent_score)
+    params.require(:match).permit(:id, :user_id, :sport, :opponent_id, :opponent_name, :user_score, :opponent_score)
   end
 end
