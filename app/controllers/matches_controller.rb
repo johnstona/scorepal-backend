@@ -17,6 +17,7 @@ class MatchesController < ApplicationController
   
   def update
     @match.update match_params
+    ActionCable.server.broadcast('match_channel', @match)
     render json: @match, except: [:password, :updated_at, :created_at]
   end
   
