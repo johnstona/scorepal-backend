@@ -13,8 +13,8 @@ class RelationshipsController < ApplicationController
 
   def destroy
     user1 = User.find(params[:id])
-    user2 = Relationship.find(params[:id]).followed
-    user1.unfollow(user2)
+    user2 = User.find(params[:follower_id])
+    user2.unfollow(user1)
   end
 
 end

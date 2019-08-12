@@ -7,6 +7,7 @@ class CreateMatches < ActiveRecord::Migration[5.2]
       t.integer :user_score
       t.integer :opponent_score
       t.references :user, foreign_key: true
+      t.boolean :live
 
       t.timestamps
     end
