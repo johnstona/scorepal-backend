@@ -8,6 +8,7 @@ class MatchesController < ApplicationController
   
   def create
     @match = Match.create match_params
+    ActionCable.server.broadcast('match_channel', @match)
     render json: @match, except: [:updated_at, :created_at]
   end
   
@@ -31,6 +32,6 @@ class MatchesController < ApplicationController
   end
 
   def match_params
-    params.require(:match).permit(:id, :user_id, :sport, :opponent_id, :opponent_name, :user_score, :opponent_score)
+    params.require(:match).permit(:id, :user_id, :sport, :opponent_id, :opponent_name, :user_score, :opponent_score, :live)
   end
 end

@@ -32,7 +32,8 @@ Match.create!(user_id: 1,
   opponent_id: 2,
   opponent_name: '',
   user_score: 1,
-  opponent_score: 0)
+  opponent_score: 0,
+  live: false)
 
 99.times do
   user_id = rand(1..99)
@@ -41,12 +42,14 @@ Match.create!(user_id: 1,
   opponent_name = Faker::Sports::Football.player
   user_score = rand(1..20)
   opponent_score = rand(1..20)
+  live = (user_id > 70) ? true : false
   Match.create!(user_id: user_id,
     sport: sport,
     opponent_id: opponent_id,
     opponent_name: opponent_name,
     user_score: user_score,
-    opponent_score: opponent_score)
+    opponent_score: opponent_score,
+    live: live)
 end
 
 # Following relationships
