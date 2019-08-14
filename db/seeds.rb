@@ -37,7 +37,7 @@ Match.create!(user_id: 1,
 
 99.times do
   user_id = rand(1..99)
-  sport = Faker::Game.title
+  sport = Faker::Team.sport
   opponent_id = rand(1..99)
   opponent_name = Faker::Sports::Football.player
   user_score = rand(1..20)
