@@ -3,7 +3,7 @@ class MatchesController < ApplicationController
   
   def index
     matches = Match.all
-    render json: matches, except: [:updated_at, :created_at]
+    render json: MatchIndexSerializer.new(matches), except: [:updated_at, :created_at]
   end
   
   def create
@@ -13,7 +13,7 @@ class MatchesController < ApplicationController
   end
   
   def show
-    render json: @match, except: [:password, :updated_at, :created_at]
+    render json: MatchSerializer.new(@match)
   end
   
   def update
@@ -32,6 +32,6 @@ class MatchesController < ApplicationController
   end
 
   def match_params
-    params.require(:match).permit(:id, :user_id, :sport, :opponent_id, :opponent_name, :user_score, :opponent_score, :live)
+    params.require(:match).permit(:id, :user_id, :sport_id, :opponent_id, :opponent_name, :user_score, :opponent_score, :live)
   end
 end
