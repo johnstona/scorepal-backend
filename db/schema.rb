@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_15_091300) do
+ActiveRecord::Schema.define(version: 2019_08_15_101028) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -18,10 +18,10 @@ ActiveRecord::Schema.define(version: 2019_08_15_091300) do
   create_table "happened_events", force: :cascade do |t|
     t.string "player"
     t.bigint "match_id"
-    t.bigint "match_events_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["match_events_id"], name: "index_happened_events_on_match_events_id"
+    t.bigint "match_event_id"
+    t.index ["match_event_id"], name: "index_happened_events_on_match_event_id"
     t.index ["match_id"], name: "index_happened_events_on_match_id"
   end
 
@@ -34,7 +34,6 @@ ActiveRecord::Schema.define(version: 2019_08_15_091300) do
   end
 
   create_table "matches", force: :cascade do |t|
-    t.string "sport"
     t.integer "opponent_id"
     t.string "opponent_name"
     t.integer "user_score"
@@ -43,6 +42,8 @@ ActiveRecord::Schema.define(version: 2019_08_15_091300) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "live"
+    t.bigint "sport_id"
+    t.index ["sport_id"], name: "index_matches_on_sport_id"
     t.index ["user_id"], name: "index_matches_on_user_id"
   end
 
@@ -77,9 +78,10 @@ ActiveRecord::Schema.define(version: 2019_08_15_091300) do
     t.datetime "updated_at", null: false
   end
 
-  add_foreign_key "happened_events", "match_events", column: "match_events_id"
+  add_foreign_key "happened_events", "match_events"
   add_foreign_key "happened_events", "matches"
   add_foreign_key "match_events", "sports"
+  add_foreign_key "matches", "sports"
   add_foreign_key "matches", "users"
   add_foreign_key "score_events", "sports"
 end

@@ -5,9 +5,48 @@ DatabaseCleaner.strategy = :truncation
 DatabaseCleaner.clean
 
 User.delete_all
+Sport.delete_all
 Match.delete_all
 Relationship.delete_all
-Sport.delete_all
+
+# Sports
+
+football = Sport.create(name: 'football')
+football.score_events.create(name: 'goal', point_value: 1)
+football.match_events.create(name: 'yellow card')
+football.match_events.create(name: 'red card')
+football.match_events.create(name: 'corner')
+football.match_events.create(name: 'free kick')
+football.match_events.create(name: 'penalty')
+
+rugby = Sport.create(name: 'rugby')
+rugby.score_events.create(name: 'try', point_value: 5)
+rugby.score_events.create(name: 'penalty kick', point_value: 3)
+rugby.score_events.create(name: 'conversion', point_value: 2)
+rugby.score_events.create(name: 'drop goal', point_value: 3)
+rugby.match_events.create(name: 'yellow card')
+rugby.match_events.create(name: 'red card')
+rugby.match_events.create(name: 'penalty')
+
+basketball = Sport.create(name: 'basketball')
+basketball.score_events.create(name: 'two-pointer', point_value: 2)
+basketball.score_events.create(name: 'three-pointer', point_value: 3)
+basketball.score_events.create(name: 'free throw', point_value: 1)
+basketball.match_events.create(name: 'SLAMDUNK!')
+basketball.match_events.create(name: 'foul')
+
+table_tennis = Sport.create(name: 'table-tennis')
+table_tennis.score_events.create(name: 'point', point_value: 1)
+
+lacrosse = Sport.create(name: 'lacrosse')
+lacrosse.score_events.create(name: 'goal', point_value: 1)
+lacrosse.match_events.create(name: 'one min penalty')
+lacrosse.match_events.create(name: 'two min penalty')
+
+hockey = Sport.create(name: 'hockey')
+hockey.score_events.create(name: 'goal', point_value: 1)
+hockey.match_events.create(name: 'penalty corner')
+hockey.match_events.create(name: 'penalty stroke')
 
 # Users
 User.create!(name:  "Example User",
@@ -17,7 +56,7 @@ User.create!(name:  "Example User",
 
 99.times do
 name  = Faker::Sports::Football.player
-username =  Faker::Sports::Football.team + rand(1..999).to_s
+username =  Faker::Creature::Animal.name + rand(1..999).to_s
 password = "password"
 avatar = rand(1..19)
 User.create!(name:  name,
@@ -29,7 +68,7 @@ end
 # Matches
 
 Match.create!(user_id: 1,
-  sport: "Sport",
+  sport: football,
   opponent_id: 2,
   opponent_name: '',
   user_score: 1,
@@ -45,7 +84,7 @@ Match.create!(user_id: 1,
   opponent_score = rand(1..20)
   live = (user_id > 70) ? true : false
   Match.create!(user_id: user_id,
-    sport: sport,
+    sport_id: rand(1..6),
     opponent_id: opponent_id,
     opponent_name: opponent_name,
     user_score: user_score,
@@ -59,4 +98,23 @@ end
   user1 = User.find(rand(1..99))
   user2 = User.find(rand(1..99))
   user1.follow(user2)
+end
+
+# Happened events
+
+1000.times do
+  dice = (rand(1..6))
+  if dice == 1
+    player = Faker::Creature::Animal.name
+  else
+    player = User.find(rand(1..User.all.length)).name
+  end
+  
+  match = Match.find(rand(1..Match.all.length))
+  match_event = MatchEvent.find(rand(1..MatchEvent.all.length))
+  
+  HappenedEvent.create!(
+    player: player,
+    match_id: match.id,
+    match_event_id: match_event.id)
 end
