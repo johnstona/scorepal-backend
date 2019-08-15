@@ -1,0 +1,2 @@
+class MatchEventsController < ApplicationController
+end

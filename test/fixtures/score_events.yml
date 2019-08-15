@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  type: 
+  point_value: 1
+  sport: one
+
+two:
+  type: 
+  point_value: 1
+  sport: two

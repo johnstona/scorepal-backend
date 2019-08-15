@@ -1,0 +1,2 @@
+class HappenedEventsController < ApplicationController
+end

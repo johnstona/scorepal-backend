@@ -7,6 +7,7 @@ DatabaseCleaner.clean
 User.delete_all
 Match.delete_all
 Relationship.delete_all
+Sport.delete_all
 
 # Users
 User.create!(name:  "Example User",

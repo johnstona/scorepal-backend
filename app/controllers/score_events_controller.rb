@@ -1,0 +1,2 @@
+class ScoreEventsController < ApplicationController
+end
