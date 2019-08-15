@@ -8,8 +8,8 @@ class MatchesController < ApplicationController
   
   def create
     @match = Match.create match_params
-    ActionCable.server.broadcast('match_channel', @match)
-    render json: @match, except: [:updated_at, :created_at]
+    ActionCable.server.broadcast('match_channel', MatchIndexSerializer.new(@match))
+    render json: MatchIndexSerializer.new(@match)
   end
   
   def show
@@ -18,8 +18,9 @@ class MatchesController < ApplicationController
   
   def update
     @match.update match_params
-    ActionCable.server.broadcast('match_channel', @match)
-    render json: @match, except: [:password, :updated_at, :created_at]
+    ActionCable.server.broadcast('match_channel', MatchIndexSerializer.new(@match))
+    ActionCable.server.broadcast('live_match_channel', MatchSerializer.new(@match))
+    render json: MatchIndexSerializer.new(@match)
   end
   
   def destroy
