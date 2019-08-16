@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :happened_score_events
   resources :happened_events
   resources :match_events
   resources :score_events

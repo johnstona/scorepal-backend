@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  player: MyString
+  score_event: one
+  match: one
+
+two:
+  player: MyString
+  score_event: two
+  match: two

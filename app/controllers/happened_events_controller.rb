@@ -1,8 +1,14 @@
 class HappenedEventsController < ApplicationController
+  def show
+    @happened_event = HappenedEvent.find happened_event_params
+    render json: HappenedEventSerializer.new(@happened_event)
+  end
+
   def create
     @happened_event = HappenedEvent.create happened_event_params
-    ActionCable.server.broadcast('live_match_channel', {@happened_event, @happened_event.match})
-    render json: @happened_event, except: :updated_at
+    @match = @happened_event.match
+    ActionCable.server.broadcast('live_match_channel', MatchSerializer.new(@match))
+    render json: HappenedEventSerializer.new(@happened_event)
   end
 
   private 
