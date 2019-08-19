@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_16_091132) do
+ActiveRecord::Schema.define(version: 2019_08_19_091219) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -21,6 +21,7 @@ ActiveRecord::Schema.define(version: 2019_08_16_091132) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "match_event_id"
+    t.string "player_name"
     t.index ["match_event_id"], name: "index_happened_events_on_match_event_id"
     t.index ["match_id"], name: "index_happened_events_on_match_id"
   end
@@ -31,6 +32,7 @@ ActiveRecord::Schema.define(version: 2019_08_16_091132) do
     t.bigint "match_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "player_name"
     t.index ["match_id"], name: "index_happened_score_events_on_match_id"
     t.index ["score_event_id"], name: "index_happened_score_events_on_score_event_id"
   end
@@ -40,6 +42,7 @@ ActiveRecord::Schema.define(version: 2019_08_16_091132) do
     t.bigint "sport_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "player_option"
     t.index ["sport_id"], name: "index_match_events_on_sport_id"
   end
 
@@ -70,6 +73,7 @@ ActiveRecord::Schema.define(version: 2019_08_16_091132) do
     t.bigint "sport_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "player_option"
     t.index ["sport_id"], name: "index_score_events_on_sport_id"
   end
 
