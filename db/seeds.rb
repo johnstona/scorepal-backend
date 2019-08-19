@@ -55,7 +55,7 @@ User.create!(name:  "Example User",
   avatar: "1")
 
 99.times do
-name  = Faker::Sports::Football.player
+name  = Faker::Address.country
 username =  Faker::Creature::Animal.name + rand(1..999).to_s
 password = "password"
 avatar = rand(1..19)
@@ -105,16 +105,39 @@ end
 1000.times do
   dice = (rand(1..6))
   if dice == 1
-    player = Faker::Creature::Animal.name
+    player = Faker::Address.country
   else
     player = User.find(rand(1..User.all.length)).name
   end
   
+  player_name = Faker::Sports::Football.player
   match = Match.find(rand(1..Match.all.length))
   match_event = MatchEvent.find(rand(1..MatchEvent.all.length))
   
   HappenedEvent.create!(
     player: player,
     match_id: match.id,
-    match_event_id: match_event.id)
+    match_event_id: match_event.id,
+    player_name: player_name)
+end
+
+# Happened sports events
+
+300.times do
+  dice = (rand(1..6))
+  if dice == 1
+    player = Faker::Address.country
+  else
+    player = User.find(rand(1..User.all.length)).name
+  end
+  
+  player_name = Faker::Sports::Football.player
+  match = Match.find(rand(1..Match.all.length))
+  score_event = ScoreEvent.find(rand(1..ScoreEvent.all.length))
+  
+  HappenedScoreEvent.create!(
+    player: player,
+    match_id: match.id,
+    score_event_id: score_event.id,
+    player_name: player_name)
 end

@@ -14,6 +14,6 @@ class HappenedEventsController < ApplicationController
   private 
 
   def happened_event_params
-    params.require(:happened_event).permit(:id, :match_id, :match_event_id, :player)
+    params.require(:happened_event).permit(:id, :match_id, :match_event_id, :player, :player_name)
   end
 end
