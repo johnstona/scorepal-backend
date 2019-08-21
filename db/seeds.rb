@@ -66,13 +66,14 @@ end
 99.times do
   user_id = User.all.sample.id
   sport = Faker::Team.sport
+  sport_id = Sport.all.sample.id
   opponent_id = User.all.sample.id
   opponent_name = Faker::Sports::Football.player
   user_score = rand(1..20)
   opponent_score = rand(1..20)
   live = (user_id > 70) ? true : false
   Match.create!(user_id: user_id,
-    sport_id: rand(1..6),
+    sport_id: sport_id,
     opponent_id: opponent_id,
     opponent_name: opponent_name,
     user_score: user_score,
