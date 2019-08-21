@@ -8,7 +8,11 @@ class UsersController < ApplicationController
   
   def create
     @user = User.create user_params
-    render json: @user, except: [:updated_at, :created_at]
+    if @user.id
+      render json: @user, except: [:password, :updated_at, :created_at]
+    else
+      render json: { message: 'Signup failed. Please try again.' }
+    end
   end
   
   def show

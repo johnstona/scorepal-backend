@@ -1,8 +1,4 @@
 require 'faker'
-require 'database_cleaner'
-
-DatabaseCleaner.strategy = :truncation
-DatabaseCleaner.clean
 
 User.delete_all
 Sport.delete_all
@@ -49,10 +45,6 @@ hockey.match_events.create(name: 'penalty corner')
 hockey.match_events.create(name: 'penalty stroke')
 
 # Users
-User.create!(name:  "Example User",
-  username: "Username",
-  password:              "foobar",
-  avatar: "1")
 
 99.times do
 name  = Faker::Address.country
@@ -67,18 +59,10 @@ end
 
 # Matches
 
-Match.create!(user_id: 1,
-  sport: football,
-  opponent_id: 2,
-  opponent_name: '',
-  user_score: 1,
-  opponent_score: 0,
-  live: false)
-
 99.times do
-  user_id = rand(1..99)
+  user_id = User.sample.id
   sport = Faker::Team.sport
-  opponent_id = rand(1..99)
+  opponent_id = User.sample.id
   opponent_name = Faker::Sports::Football.player
   user_score = rand(1..20)
   opponent_score = rand(1..20)
@@ -95,8 +79,8 @@ end
 # Following relationships
 
 500.times do
-  user1 = User.find(rand(1..99))
-  user2 = User.find(rand(1..99))
+  user1 = User.sample
+  user2 = User.sample
   user1.follow(user2)
 end
 
@@ -107,12 +91,12 @@ end
   if dice == 1
     player = Faker::Address.country
   else
-    player = User.find(rand(1..User.all.length)).name
+    player = User.sample
   end
   
   player_name = Faker::Sports::Football.player
-  match = Match.find(rand(1..Match.all.length))
-  match_event = MatchEvent.find(rand(1..MatchEvent.all.length))
+  match = Match.sample
+  match_event = MatchEvent.sample
   
   HappenedEvent.create!(
     player: player,
@@ -128,12 +112,12 @@ end
   if dice == 1
     player = Faker::Address.country
   else
-    player = User.find(rand(1..User.all.length)).name
+    player = User.sample.name
   end
   
   player_name = Faker::Sports::Football.player
-  match = Match.find(rand(1..Match.all.length))
-  score_event = ScoreEvent.find(rand(1..ScoreEvent.all.length))
+  match = Match.sample
+  score_event = ScoreEvent.sample
   
   HappenedScoreEvent.create!(
     player: player,
