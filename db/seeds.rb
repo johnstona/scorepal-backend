@@ -1,9 +1,9 @@
 require 'faker'
 
-User.delete_all
-Sport.delete_all
-Match.delete_all
-Relationship.delete_all
+User.destroy_all
+Sport.destroy_all
+Match.destroy_all
+Relationship.destroy_all
 
 # Sports
 
