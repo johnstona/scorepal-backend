@@ -60,9 +60,9 @@ end
 # Matches
 
 99.times do
-  user_id = User.sample.id
+  user_id = User.all.sample.id
   sport = Faker::Team.sport
-  opponent_id = User.sample.id
+  opponent_id = User.all.sample.id
   opponent_name = Faker::Sports::Football.player
   user_score = rand(1..20)
   opponent_score = rand(1..20)
@@ -79,8 +79,8 @@ end
 # Following relationships
 
 500.times do
-  user1 = User.sample
-  user2 = User.sample
+  user1 = User.all.sample
+  user2 = User.all.sample
   user1.follow(user2)
 end
 
@@ -91,12 +91,12 @@ end
   if dice == 1
     player = Faker::Address.country
   else
-    player = User.sample
+    player = User.all.sample
   end
   
   player_name = Faker::Sports::Football.player
-  match = Match.sample
-  match_event = MatchEvent.sample
+  match = Match.all.sample
+  match_event = MatchEvent.all.sample
   
   HappenedEvent.create!(
     player: player,
@@ -112,12 +112,12 @@ end
   if dice == 1
     player = Faker::Address.country
   else
-    player = User.sample.name
+    player = User.all.sample.name
   end
   
   player_name = Faker::Sports::Football.player
-  match = Match.sample
-  score_event = ScoreEvent.sample
+  match = Match.all.sample
+  score_event = ScoreEvent.all.sample
   
   HappenedScoreEvent.create!(
     player: player,
