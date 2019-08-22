@@ -96,7 +96,7 @@ end
   if dice == 1
     player = Faker::Address.country
   else
-    player = User.all.sample
+    player = User.all.sample.name
   end
   
   player_name = Faker::Sports::Football.player
