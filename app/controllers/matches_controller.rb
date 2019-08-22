@@ -8,8 +8,12 @@ class MatchesController < ApplicationController
   
   def create
     @match = Match.create match_params
-    ActionCable.server.broadcast('match_channel', MatchIndexSerializer.new(@match))
-    render json: MatchIndexSerializer.new(@match)
+    if @match.id
+      ActionCable.server.broadcast('match_channel', MatchIndexSerializer.new(@match))
+      render json: MatchIndexSerializer.new(@match)
+    else
+      render json: {errors: @match.errors.full_messages}
+    end
   end
   
   def show
