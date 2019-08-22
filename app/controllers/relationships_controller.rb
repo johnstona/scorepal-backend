@@ -9,8 +9,8 @@ class RelationshipsController < ApplicationController
     user1 = User.find(params[:follower_id])
     user2 = User.find(params[:followed_id])
     user1.follow(user2)
-    relationships = Relationship.all.select(:follower_id == user1.id)
-    render json: relationships, except: [:updated_at, :created_at]
+    # relationships = Relationship.all.select(:follower_id === user1.id)
+    render json: { message: 'Followed!'}
   end
 
   def destroy
