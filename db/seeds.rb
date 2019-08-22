@@ -5,8 +5,8 @@ HappenedScoreEvent.destroy_all
 ScoreEvent.destroy_all
 MatchEvent.destroy_all
 Relationship.destroy_all
-Sport.destroy_all
 Match.destroy_all
+Sport.destroy_all
 User.destroy_all
 
 # Sports
